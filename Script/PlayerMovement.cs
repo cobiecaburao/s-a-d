@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Processing inputs
         ProcessInputs();
-        flipCharacterX()
+        flipCharacterX();
     }
 
     void FixedUpdate()
@@ -41,8 +41,8 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsMoving", false);
         }
 
-        bool flipped = moveDirection.x < 0;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
+        //bool flipped = moveDirection.x < 0;
+        //this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
 
     }
 
@@ -54,6 +54,15 @@ public class PlayerMovement : MonoBehaviour
 
     void flipCharacterX()
     {
+        if (transform.position.x > xPosLastFrame) {
+            // we are moving right
+            spriteRenderer.flipX = false;
+        }
+        else if(transform.position.x < xPosLastFrame) {
+            // we are moving left
+            spriteRenderer.flipX = true;
+        }
 
+        xPosLastFrame = transform.position.x;
     }
 }
